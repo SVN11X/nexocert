@@ -1,0 +1,483 @@
+[
+  {
+    "id": "lab-models",
+    "type": "models",
+    "domainId": "planificar",
+    "title": "Selección de modelos",
+    "lessonId": "l01",
+    "objectiveIds": [
+      "p01",
+      "p02",
+      "g01"
+    ],
+    "objective": "Seleccionar un candidato que satisfaga modalidad, contexto y latencia.",
+    "prerequisites": [
+      "LLM y SLM",
+      "Modalidades",
+      "Métricas de evaluación"
+    ],
+    "scenario": "Una app debe procesar texto o imágenes bajo restricciones de tiempo y contexto.",
+    "resources": [
+      "Tres candidatos sintéticos con capacidades y coste relativo."
+    ],
+    "steps": [
+      "Cambia la modalidad y las restricciones.",
+      "Evalúa cada candidato y explica por qué cumple o falla.",
+      "Compara candidatos factibles y recuerda evaluar calidad."
+    ],
+    "result": "La factibilidad se calcula comparando requisitos con capacidades declaradas. Cumplir límites no demuestra precisión.",
+    "errors": [
+      "Elegir siempre el modelo más grande.",
+      "Confundir contexto con memoria."
+    ],
+    "reflection": [
+      "¿Qué conjunto mediría la calidad?",
+      "¿Qué restricciones descartan candidatos antes de inferencia?"
+    ],
+    "sourceIds": [
+      "guide",
+      "deploy"
+    ]
+  },
+  {
+    "id": "lab-rag",
+    "type": "rag",
+    "domainId": "generativa",
+    "title": "Construir un sistema RAG",
+    "lessonId": "l09",
+    "objectiveIds": [
+      "g02",
+      "x01",
+      "x04",
+      "p03"
+    ],
+    "objective": "Explorar fragmentación, solapamiento y recuperación local.",
+    "prerequisites": [
+      "RAG",
+      "Límites de fragmentos",
+      "Grounding"
+    ],
+    "scenario": "Un agente de tienda necesita responder sobre devoluciones sin inventar una garantía.",
+    "resources": [
+      "Tres documentos originales de tienda.",
+      "Ranking local TF-IDF."
+    ],
+    "steps": [
+      "Prueba una consulta de devolución y otra de garantía.",
+      "Cambia tamaño, solapamiento y número de resultados.",
+      "Inspecciona si la evidencia recuperada conserva condiciones."
+    ],
+    "result": "Se construyen fragmentos y se calculan coincidencias TF-IDF. No hay embeddings ni respuesta generada por LLM.",
+    "errors": [
+      "Confundir ranking léxico con embeddings reales.",
+      "Responder con una condición incompleta."
+    ],
+    "reflection": [
+      "¿Qué caso no tiene evidencia?",
+      "¿Cuándo el fragmento pierde una excepción?"
+    ],
+    "sourceIds": [
+      "guide",
+      "hybrid"
+    ]
+  },
+  {
+    "id": "lab-hybrid",
+    "type": "hybrid",
+    "domainId": "extraccion",
+    "title": "Búsqueda híbrida y fusión RRF",
+    "lessonId": "l23",
+    "objectiveIds": [
+      "x02",
+      "p03"
+    ],
+    "objective": "Fusionar rankings con RRF y observar el efecto de pesos.",
+    "prerequisites": [
+      "Búsqueda léxica y vectorial",
+      "Ranking"
+    ],
+    "scenario": "Consultas exactas y paráfrasis pueden ordenar documentos de forma distinta.",
+    "resources": [
+      "Rankings léxicos y semánticos sintéticos.",
+      "Cálculo real de RRF."
+    ],
+    "steps": [
+      "Selecciona una consulta de ejemplo.",
+      "Modifica constante y peso semántico.",
+      "Compara posiciones y score fusionado."
+    ],
+    "result": "Los rankings son ejemplos, pero cada contribución 1/(k+posición) se calcula. No se suman scores brutos de métodos distintos.",
+    "errors": [
+      "Confundir k de RRF con k de vecinos.",
+      "Afirmar que se ejecutó Azure AI Search."
+    ],
+    "reflection": [
+      "¿Qué ocurre con peso semántico cero?",
+      "¿Por qué se usan posiciones en la fusión?"
+    ],
+    "sourceIds": [
+      "hybrid",
+      "rrf"
+    ]
+  },
+  {
+    "id": "lab-functions",
+    "type": "functions",
+    "domainId": "generativa",
+    "title": "Function calling y contratos",
+    "lessonId": "l10",
+    "objectiveIds": [
+      "g07",
+      "g08",
+      "g09",
+      "p16"
+    ],
+    "objective": "Validar argumentos y separar propuesta, permiso y efecto.",
+    "prerequisites": [
+      "JSON",
+      "Herramientas de agente"
+    ],
+    "scenario": "Un agente propone consultar o reembolsar un pedido.",
+    "resources": [
+      "Contrato local orderId A123 y amount entero 1–500.",
+      "Estado de aprobación humana."
+    ],
+    "steps": [
+      "Prueba un identificador o campo adicional inválido.",
+      "Envía argumentos válidos sin aprobación.",
+      "Aprueba una llamada concreta y observa el flujo."
+    ],
+    "result": "La máquina valida estructura, valores y aprobación antes de simular la operación. No llama a una tienda real.",
+    "errors": [
+      "Confundir JSON válido con autorización.",
+      "Aceptar campos adicionales sin contrato."
+    ],
+    "reflection": [
+      "¿Qué validaciones viven en el runtime?",
+      "¿Qué hace el flujo si la aprobación está ausente?"
+    ],
+    "sourceIds": [
+      "guide",
+      "rbac"
+    ]
+  },
+  {
+    "id": "lab-agents",
+    "type": "agents",
+    "domainId": "generativa",
+    "title": "Configurar un agente acotado",
+    "lessonId": "l35",
+    "objectiveIds": [
+      "g07",
+      "g08",
+      "g11",
+      "p04",
+      "p16"
+    ],
+    "objective": "Diseñar objetivo, memoria, herramientas y presupuesto.",
+    "prerequisites": [
+      "Estado de tarea",
+      "Mínimo privilegio"
+    ],
+    "scenario": "La tarea es responder políticas o gestionar reembolso con límites.",
+    "resources": [
+      "Objetivos, herramientas y memoria declarados.",
+      "Máquina de estados local."
+    ],
+    "steps": [
+      "Selecciona meta y herramienta.",
+      "Reduce máximo de pasos e inyecta falta de aprobación.",
+      "Identifica éxito o estado de parada."
+    ],
+    "result": "Las reglas verifican compatibilidad de herramienta, presupuesto y aprobación. La memoria seleccionada modifica el alcance de persistencia del escenario descrito, no guarda datos reales de pedidos.",
+    "errors": [
+      "Dar herramientas que no resuelven la meta.",
+      "Tratar explorar el laboratorio como dominio certificado."
+    ],
+    "reflection": [
+      "¿Cuándo debe detenerse?",
+      "¿Qué retención requiere memoria duradera?"
+    ],
+    "sourceIds": [
+      "guide",
+      "guardrails"
+    ]
+  },
+  {
+    "id": "lab-multiagent",
+    "type": "multiagent",
+    "domainId": "generativa",
+    "title": "Orquestación de especialistas",
+    "lessonId": "l39",
+    "objectiveIds": [
+      "g10",
+      "g16",
+      "g11"
+    ],
+    "objective": "Comparar secuencia, paralelismo y propagación de fallos.",
+    "prerequisites": [
+      "Contratos de especialistas",
+      "Dependencias"
+    ],
+    "scenario": "Un coordinador combina recuperación y análisis independientes antes de validar.",
+    "resources": [
+      "Spans sintéticos de 120, 350, 650 y 180 ms.",
+      "Fallo y presupuesto editables."
+    ],
+    "steps": [
+      "Compara secuencia con ramas independientes en paralelo.",
+      "Reduce presupuesto total.",
+      "Activa fallo del recuperador y revisa el validador."
+    ],
+    "result": "Se calcula camino crítico y estado final. Un fallo de evidencia bloquea éxito aunque otras ramas terminen.",
+    "errors": [
+      "Paralelizar etapas dependientes.",
+      "Ocultar un fallo como conclusión válida."
+    ],
+    "reflection": [
+      "¿Qué tarea depende de ambas ramas?",
+      "¿El paralelismo cambia permisos?"
+    ],
+    "sourceIds": [
+      "guide",
+      "observe"
+    ]
+  },
+  {
+    "id": "lab-generation",
+    "type": "generation",
+    "domainId": "generativa",
+    "title": "Parámetros de generación",
+    "lessonId": "l40",
+    "objectiveIds": [
+      "g13"
+    ],
+    "objective": "Observar temperatura y top-p sobre probabilidades sintéticas.",
+    "prerequisites": [
+      "Tokens",
+      "Distribución de probabilidad"
+    ],
+    "scenario": "Quieres entender variabilidad sin usar un modelo ni fingir respuestas.",
+    "resources": [
+      "Cuatro logits hipotéticos [2,1,0.2,-0.7].",
+      "Softmax y renormalización local."
+    ],
+    "steps": [
+      "Modifica temperatura y observa concentración.",
+      "Reduce top-p y observa candidatos eliminados.",
+      "Explica por qué no se está midiendo verdad factual."
+    ],
+    "result": "El cálculo transforma logits a probabilidades y filtra masa acumulada. No genera lenguaje ni reproduce una API comercial.",
+    "errors": [
+      "Confundir probabilidad de token con certeza factual.",
+      "Extrapolar soporte de parámetros a cualquier modelo."
+    ],
+    "reflection": [
+      "¿Qué pasa al bajar temperatura?",
+      "¿Estos controles crean evidencia?"
+    ],
+    "sourceIds": [
+      "guide"
+    ]
+  },
+  {
+    "id": "lab-quota",
+    "type": "quota",
+    "domainId": "planificar",
+    "title": "Cuotas, consumo y escalabilidad",
+    "lessonId": "l30",
+    "objectiveIds": [
+      "p09"
+    ],
+    "objective": "Calcular admisión de solicitudes y coste hipotético.",
+    "prerequisites": [
+      "RPM",
+      "TPM",
+      "Consumo por tarea"
+    ],
+    "scenario": "Un pico de solicitudes debe cumplir cuotas de llamadas y tokens.",
+    "resources": [
+      "Límites y precios en unidades hipotéticas.",
+      "Demanda agregada de un minuto."
+    ],
+    "steps": [
+      "Cambia demanda, entrada y salida.",
+      "Modifica RPM y TPM.",
+      "Identifica límite dominante y alternativas de diseño."
+    ],
+    "result": "Aceptadas=min(demanda,RPM,floor(TPM/(entrada+salida))). Coste usa sólo llamadas aceptadas con tarifas ficticias. El servicio real puede estimar límites de otra manera.",
+    "errors": [
+      "Presentar estas unidades como tarifas Azure.",
+      "Ignorar iteraciones del agente."
+    ],
+    "reflection": [
+      "¿Cuándo domina TPM?",
+      "¿Qué tarea tolera una cola?"
+    ],
+    "sourceIds": [
+      "guide",
+      "deploy"
+    ]
+  },
+  {
+    "id": "lab-security",
+    "type": "security",
+    "domainId": "planificar",
+    "title": "Seguridad y acceso efectivo",
+    "lessonId": "l32",
+    "objectiveIds": [
+      "p12",
+      "p16"
+    ],
+    "objective": "Separar identidad, red y autorización de datos.",
+    "prerequisites": [
+      "Autenticación",
+      "RBAC",
+      "Endpoint privado"
+    ],
+    "scenario": "La aplicación solicita lectura o escritura con un rol y una ruta de red.",
+    "resources": [
+      "Roles didácticos lector, escritor y administrador.",
+      "Estados de identidad y conectividad."
+    ],
+    "steps": [
+      "Prueba escritura con rol lector.",
+      "Desactiva identidad o ruta privada.",
+      "Usa el mínimo rol que permite la operación."
+    ],
+    "result": "La evaluación comprueba identidad, conectividad cuando hay endpoint privado y permiso del rol. Nombres de roles son simplificados y no roles oficiales de Azure.",
+    "errors": [
+      "Suponer que endpoint privado concede permisos.",
+      "Resolver cualquier fallo concediendo administrador."
+    ],
+    "reflection": [
+      "¿Qué falla con red válida y sin identidad?",
+      "¿Cuándo hay permisos excesivos?"
+    ],
+    "sourceIds": [
+      "rbac"
+    ]
+  },
+  {
+    "id": "lab-traces",
+    "type": "traces",
+    "domainId": "generativa",
+    "title": "Observabilidad y análisis de trazas",
+    "lessonId": "l31",
+    "objectiveIds": [
+      "p10",
+      "g12",
+      "g15",
+      "p15"
+    ],
+    "objective": "Localizar duración dominante y error de una herramienta.",
+    "prerequisites": [
+      "Span",
+      "Camino crítico"
+    ],
+    "scenario": "Un agente usa recuperación, modelo y herramienta de forma secuencial.",
+    "resources": [
+      "Duraciones sintéticas editables.",
+      "Un fallo 403 configurable."
+    ],
+    "steps": [
+      "Modifica duración de cada span.",
+      "Activa el fallo de herramienta.",
+      "Compara latencia con éxito de tarea."
+    ],
+    "result": "Total es la suma de spans secuenciales; la etapa más larga domina. Un 403 no se repara mejorando tono de respuesta.",
+    "errors": [
+      "Sumar spans concurrentes sin revisar dependencia.",
+      "Registrar credenciales en trazas."
+    ],
+    "reflection": [
+      "¿Qué capa resuelve el 403?",
+      "¿Una traza sin errores prueba grounding?"
+    ],
+    "sourceIds": [
+      "observe",
+      "rbac"
+    ]
+  },
+  {
+    "id": "lab-documents",
+    "type": "documents",
+    "domainId": "extraccion",
+    "title": "Extracción documental con procedencia",
+    "lessonId": "l24",
+    "objectiveIds": [
+      "x06",
+      "x07",
+      "x08",
+      "v10"
+    ],
+    "objective": "Explorar regiones, campos y validaciones de una factura.",
+    "prerequisites": [
+      "OCR",
+      "Layout",
+      "Confianza"
+    ],
+    "scenario": "Una factura sintética tiene subtotal 80, impuesto 15 y total 95.",
+    "resources": [
+      "Documento SVG original.",
+      "Campos, regiones y confianza declarados."
+    ],
+    "steps": [
+      "Selecciona campos por controles accesibles.",
+      "Activa un total incorrecto y cambia umbral de revisión.",
+      "Compara JSON con y sin procedencia."
+    ],
+    "result": "Se comprueba subtotal+impuesto=total y campos bajo umbral. No ejecuta OCR ni estima confianza real; los valores son datos sintéticos.",
+    "errors": [
+      "Aceptar una relación inconsistente por confianza alta.",
+      "Eliminar regiones necesarias para revisión."
+    ],
+    "reflection": [
+      "¿Qué aporta layout?",
+      "¿Por qué confianza y coherencia son independientes?"
+    ],
+    "sourceIds": [
+      "content"
+    ]
+  },
+  {
+    "id": "lab-evaluation",
+    "type": "evaluation",
+    "domainId": "generativa",
+    "title": "Evaluación de respuestas fundamentadas",
+    "lessonId": "l37",
+    "objectiveIds": [
+      "g04",
+      "g14",
+      "p14"
+    ],
+    "objective": "Clasificar afirmaciones contra documentos fuente.",
+    "prerequisites": [
+      "Grounding",
+      "Relevancia"
+    ],
+    "scenario": "La respuesta mezcla un plazo válido, una acción contradictoria y una garantía ausente.",
+    "resources": [
+      "Tres afirmaciones originales y tres fuentes locales.",
+      "Criterios declarados de respaldo."
+    ],
+    "steps": [
+      "Lee las fuentes antes de clasificar.",
+      "Asigna respaldada, contradicha o sin evidencia.",
+      "Comprueba razones y diferencias."
+    ],
+    "result": "El verificador compara selecciones con etiquetas esperadas. No es un evaluador LLM ni un detector universal de fabricaciones.",
+    "errors": [
+      "Confundir ausencia de evidencia con falsedad universal.",
+      "Aceptar una cita sin revisar cada afirmación."
+    ],
+    "reflection": [
+      "¿Cuál dimensión no mide gramática?",
+      "¿Cómo calibrarías un evaluador automático?"
+    ],
+    "sourceIds": [
+      "guide",
+      "observe"
+    ]
+  }
+]

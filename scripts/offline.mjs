@@ -1,0 +1,8 @@
+import { readdir, readFile, writeFile } from 'node:fs/promises';
+import { createHash } from 'node:crypto';
+async function walk(dir){const names=await readdir(dir,{withFileTypes:true});const files=[];for(const n of names){const p=dir+'/'+n.name;if(n.isDirectory())files.push(...await walk(p));else files.push(p);}return files;}
+const files=(await walk('dist')).filter(p=>!p.endsWith('/sw.js'));
+const hash=createHash('sha256');for(const f of files)hash.update(await readFile(f));
+const revision=hash.digest('hex').slice(0,16);const urls=files.map(p=>'./'+p.slice(5));
+const script=`const PREFIX='nexocert-'+encodeURIComponent(new URL(self.registration.scope).pathname)+'-';\nconst CACHE=PREFIX+${JSON.stringify(revision)};\nconst ASSETS=${JSON.stringify(urls)};\nself.addEventListener('install',e=>e.waitUntil(caches.open(CACHE).then(c=>c.addAll(ASSETS))));\nself.addEventListener('message',e=>{if(e.data==='SKIP_WAITING')self.skipWaiting();});\nself.addEventListener('activate',e=>e.waitUntil(caches.keys().then(keys=>Promise.all(keys.filter(k=>k.startsWith(PREFIX)&&k!==CACHE).map(k=>caches.delete(k)))).then(()=>self.clients.claim())));\nself.addEventListener('fetch',e=>{const u=new URL(e.request.url);if(e.request.method!=='GET'||u.origin!==self.location.origin||!u.href.startsWith(self.registration.scope))return;if(e.request.mode==='navigate'){e.respondWith(fetch(e.request).catch(()=>caches.open(CACHE).then(c=>c.match(new URL('./index.html',self.registration.scope).href))));return;}e.respondWith(caches.open(CACHE).then(async c=>{const r=await c.match(e.request);return r||fetch(e.request);}));});\n`;
+await writeFile('dist/sw.js',script);console.log('Offline: '+files.length+' recursos · revisión '+revision);

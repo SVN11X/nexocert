@@ -1,0 +1,51 @@
+{
+  "schemaVersion": 2,
+  "kind": "content-patch",
+  "examId": "ai-103",
+  "baseVersion": "2.0.0",
+  "contentVersion": "2.0.1-ejemplo",
+  "lessons": [
+    {
+      "id": "ejemplo-modelos",
+      "domainId": "planificar",
+      "topic": "Elegir servicios y modelos en Microsoft Foundry",
+      "title": "Ejemplo importable: elegir con restricciones",
+      "summary": "Lección añadida por un paquete de demostración.",
+      "objectives": [
+        "Explicar llm frente a slm y justificar su uso en el escenario.",
+        "Explicar grounding y justificar su uso en el escenario."
+      ],
+      "objectiveIds": [
+        "p01",
+        "p02"
+      ],
+      "prerequisites": [
+        "l01"
+      ],
+      "difficulty": "intermedio",
+      "minutes": 13,
+      "concepts": [
+        "LLM frente a SLM",
+        "Grounding"
+      ],
+      "blocks": [
+        {
+          "id": "ejemplo-b1",
+          "version": 1,
+          "type": "markdown",
+          "accessibleDescription": "Selección verificable",
+          "body": "## Evalúa antes de elegir\n\nCompara modalidad, latencia, coste y calidad con un conjunto propio. Esta lección de ejemplo demuestra una importación declarativa segura y no añade un nuevo examen oficial."
+        }
+      ],
+      "sourceIds": [
+        "guide",
+        "deploy",
+        "rbac",
+        "observe"
+      ],
+      "updatedAt": "2026-10-12"
+    }
+  ],
+  "questions": [],
+  "flashcards": []
+}

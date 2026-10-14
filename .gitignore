@@ -1,0 +1,8 @@
+node_modules/
+dist/
+test-results/
+playwright-report/
+.env*
+*.local
+.openai/execution-profile.json
+.openai/*.tar.gz

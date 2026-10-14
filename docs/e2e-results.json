@@ -1,0 +1,52 @@
+{
+  "stats": {
+    "startTime": "2026-10-13T00:19:15.908Z",
+    "duration": 8473.029,
+    "expected": 10,
+    "skipped": 0,
+    "unexpected": 0,
+    "flaky": 0
+  },
+  "tests": [
+    {
+      "title": "catálogo, lección, notas, práctica y persistencia real",
+      "status": "expected"
+    },
+    {
+      "title": "flashcards guardan autocalificación y próxima fecha",
+      "status": "expected"
+    },
+    {
+      "title": "simulacro se retoma y evalúa todas las preguntas sin feedback previo",
+      "status": "expected"
+    },
+    {
+      "title": "los doce laboratorios responden a controles y no generan errores",
+      "status": "expected"
+    },
+    {
+      "title": "importación revisada preserva progreso y rechaza contenido inseguro",
+      "status": "expected"
+    },
+    {
+      "title": "tema, teclado y pantalla móvil sin desbordamiento",
+      "status": "expected"
+    },
+    {
+      "title": "la compilación funciona en subruta Pages y offline tras precache",
+      "status": "expected"
+    },
+    {
+      "title": "examen nuevo se registra por paquete sin modificar componentes",
+      "status": "expected"
+    },
+    {
+      "title": "datos incompatibles no se sobrescriben con un estado vacío",
+      "status": "expected"
+    },
+    {
+      "title": "rutas móviles mantienen lectura y controles dentro de la pantalla",
+      "status": "expected"
+    }
+  ]
+}
